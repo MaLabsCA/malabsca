@@ -1,0 +1,54 @@
+<odoo>
+  <record id="view_ups_backend_tree" model="ir.ui.view">
+    <field name="name">ups.backend.tree</field>
+    <field name="model">ups.backend</field>
+    <field name="type">tree</field>
+    <field name="priority" eval="8"/>
+    <field name="arch" type="xml">
+      <tree string="Backend">
+        <field name="server"/>
+        <field name="db"/>
+      </tree>
+    </field>
+  </record>
+
+
+  <record id="view_mc_ups_backend_form" model="ir.ui.view">
+    <field name="name">ups.backend.form</field>
+    <field name="model">ups.backend</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="Backend">
+
+        <header>
+          <button string="Check Connection" class="oe_highlight" type="object" name="test_connection"/>
+        </header>
+
+        <sheet>
+          <group col="2">
+            <field name="server"/>
+            <field name="user"/>
+            <field name="passwd" password="True"/>
+            <field name="db"/>
+          </group>
+
+          <group col="4">
+            <label string="Export Stock Picking" class="oe_inline"/>
+            <button name="export_picking" type="object" class="oe_highlight" string="Export in background"/>
+          </group>
+        </sheet>
+
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="act_open_ups_backend_view">
+    <field name="name">UPS</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">ups.backend</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_mc_ups" parent="connector.menu_connector_root" name="UPS" action="act_open_ups_backend_view"/>
+</odoo>
